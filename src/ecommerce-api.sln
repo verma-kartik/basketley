@@ -7,17 +7,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Product", "Product", "{0232
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Customer", "Customer", "{45B5A364-0DD4-4D58-9709-DCBA5BCFC213}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Product.API", "Product\Product.API\Product.API.csproj", "{AC73136C-DA81-452F-9452-44FCF83DF43F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Product.API", "Product\Product.API\Product.API.csproj", "{AC73136C-DA81-452F-9452-44FCF83DF43F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer.API", "Customer\Customer.API\Customer.API.csproj", "{EB648071-0857-4C09-8ED0-FCE9B7601DBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Customer.API", "Customer\Customer.API\Customer.API.csproj", "{EB648071-0857-4C09-8ED0-FCE9B7601DBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Product\Contracts\Contracts.csproj", "{0B195E18-7919-4A68-81BF-CC486F8682C1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Product\Contracts\Contracts.csproj", "{0B195E18-7919-4A68-81BF-CC486F8682C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contracts", "Customer\Contracts\Contracts.csproj", "{5DE92811-409D-4754-ACA0-92949A228483}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Customer\Contracts\Contracts.csproj", "{5DE92811-409D-4754-ACA0-92949A228483}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "Product\LoggerService\LoggerService.csproj", "{5D6D9D0B-881C-4660-9ABA-1B08790CB0FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "Product\LoggerService\LoggerService.csproj", "{5D6D9D0B-881C-4660-9ABA-1B08790CB0FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "Customer\LoggerService\LoggerService.csproj", "{5C15D5B6-C05D-47A9-A9BF-4E352D15C1DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggerService", "Customer\LoggerService\LoggerService.csproj", "{5C15D5B6-C05D-47A9-A9BF-4E352D15C1DF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{BAC8205A-EA18-4D6B-84A9-9D19C3A525DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -54,6 +56,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{023254AC-E30E-4767-9EF1-1B338F5AFBF6} = {BAC8205A-EA18-4D6B-84A9-9D19C3A525DB}
+		{45B5A364-0DD4-4D58-9709-DCBA5BCFC213} = {BAC8205A-EA18-4D6B-84A9-9D19C3A525DB}
 		{AC73136C-DA81-452F-9452-44FCF83DF43F} = {023254AC-E30E-4767-9EF1-1B338F5AFBF6}
 		{EB648071-0857-4C09-8ED0-FCE9B7601DBC} = {45B5A364-0DD4-4D58-9709-DCBA5BCFC213}
 		{0B195E18-7919-4A68-81BF-CC486F8682C1} = {023254AC-E30E-4767-9EF1-1B338F5AFBF6}
