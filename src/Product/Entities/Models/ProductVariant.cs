@@ -5,17 +5,8 @@ namespace Entities.Models
 {
     public class ProductVariant
     {
-        public ProductVariant() : this(string.Empty, string.Empty,
-            0, DateTime.Now, DateTime.Now, false //, new Weight(), false, new ProductImage()
-                                                  )
-        {
-
-        }
-        public ProductVariant(string? id,
-            string? title, double price, DateTime created,
-            DateTime updated, bool isAvailable//Weight weight, 
-                                              //ProductImage image
-            )
+        public ProductVariant() : this(string.Empty, string.Empty, 0, DateTime.Now, DateTime.Now, false) { }
+        public ProductVariant(string? id, string? title, double price, DateTime created, DateTime updated, bool isAvailable)
         {
             Id = id;
             Title = title;
@@ -23,8 +14,6 @@ namespace Entities.Models
             Created = created;
             UpdatedAt = updated;
             IsAvailable = isAvailable;
-            //WeightOfProduct = weight;
-            //Image = image;
         }
 
         public string? Id { get; set; }
@@ -39,13 +28,7 @@ namespace Entities.Models
 
         public DateTime UpdatedAt { get; set; }
 
-
         public bool IsAvailable { get; set; }
 
-        //[BsonElement("weight")]
-        //public Weight WeightOfProduct { get; set; }
-
-        //[BsonElement("image")]
-        //public ProductImage Image { get; set; }
     }
 }

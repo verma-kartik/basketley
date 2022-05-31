@@ -10,8 +10,7 @@ namespace Entities.Models
         {
             WeightOfProduct = new Weight();
             Image = new ProductImage();
-            //ProductVariants = new List<ProductVariant>();
-            ProductVariant = new ProductVariant();
+            ProductVariants = new List<ProductVariant> { new ProductVariant() };
         }
 
         [BsonId]
@@ -56,9 +55,9 @@ namespace Entities.Models
         [BsonElement("image")]
         public ProductImage Image { get; set; }
 
+        [BsonIgnore]
         [BsonElement("product-variant")]
-        public ProductVariant ProductVariant { get; set; }
-        //public List<ProductVariant> ProductVariants { get; set; }
+        public List<ProductVariant> ProductVariants { get; set; }
 
     }
 }
