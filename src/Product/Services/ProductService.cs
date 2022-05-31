@@ -7,15 +7,6 @@ namespace Services
 {
     public sealed class ProductService : IProductService
     {
-        //private readonly IProductRepository _productRepository;
-        //private readonly ILoggerManager _logger;
-
-        //public ProductService(IProductRepository productRepository, ILoggerManager logger)
-        //{
-        //    _productRepository = productRepository;
-        //    _logger = logger;
-        //}
-
         private readonly IRepositoryManager _repositoryManager;
         private readonly ILoggerManager _loggerManager;
 
@@ -25,6 +16,7 @@ namespace Services
             _loggerManager = loggerManager;
         }
 
+        
         public async Task<IEnumerable<Product>> GetProducts()
         {
             try
@@ -40,6 +32,33 @@ namespace Services
             }
         }
 
+        public async Task<long> GetProductCount()
+        {
+            try
+            {
+                return await _repositoryManager.Product.GetProductCount();
+            }
+            catch (Exception ex)
+            {
+                _loggerManager.LogError($"Something went wrong in the {nameof(GetProductCount)} " +
+                    $"service method {ex}");
+                throw;
+            }
+        }
+
+        public async Task<Product> GetProductById(string productId)
+        {
+            try
+            {
+                return await _repositoryManager.Product.GetProductById(productId);
+            }
+            catch (Exception ex)
+            {
+                _loggerManager.LogError($"Something went wrong in the {nameof(GetProductById)} " +
+                    $"service method {ex}. Product not found with ID {nameof(productId)}. Try again!");
+                throw;
+            }
+        }
 
     }
 }

@@ -10,5 +10,9 @@ namespace Services.Contracts
     public interface IProductService
     {
         public Task<IEnumerable<Product>> GetProducts();
+
+        public Task<long> GetProductCount();
+
+        public Task<Product> GetProductById(string productId);
     }
 }
