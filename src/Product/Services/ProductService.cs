@@ -2,6 +2,7 @@
 using Entities.Models;
 using Repository;
 using Services.Contracts;
+using Shared.RequestParameters;
 
 namespace Services
 {
@@ -17,12 +18,12 @@ namespace Services
         }
 
         
-        public async Task<IEnumerable<Product>> GetProducts()
+        public async Task<(IEnumerable<Product> products, MetaData metaData)> GetProducts(ProductParameters productParameters)
         {
             try
             {
-                var products = await _repositoryManager.Product.GetProducts();
-                return products;
+                var productsWithMetaData = await _repositoryManager.Product.GetProducts(productParameters);
+                return (products: productsWithMetaData, metaData: productsWithMetaData.MetaData);
             }
             catch(Exception ex)
             {

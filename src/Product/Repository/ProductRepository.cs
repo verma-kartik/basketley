@@ -1,5 +1,6 @@
 ﻿using Entities.Models;
 using MongoDB.Driver;
+using Shared.RequestParameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,10 +63,14 @@ namespace Repository
             return await _productContext.Products.Find(p => true).CountDocumentsAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetProducts()
+        public async Task<PagedList<Product>> GetProducts(ProductParameters productParameters)
         {
-            var products = await _productContext.Products.Find(p => true).ToListAsync();
-            return products;
+            var products = await _productContext.Products
+                .Find(p => true)
+                .SortBy(p => p.Name)
+                .ToListAsync();
+
+            return PagedList<Product>.ToPagedList(products, productParameters.PageNumber, productParameters.PageSize);
         }
 
         public async Task<bool> UpdateProduct(Product product)

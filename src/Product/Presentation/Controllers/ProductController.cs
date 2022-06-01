@@ -1,7 +1,9 @@
 ﻿using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
+using Shared.RequestParameters;
 using System.Net;
+using System.Text.Json;
 
 namespace Presentation.Controllers
 {
@@ -18,11 +20,12 @@ namespace Presentation.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts()
+        public async Task<ActionResult<IEnumerable<Product>>> GetProducts([FromQuery] ProductParameters productParameters)
         {
             try
             {
-                var products = await _services.ProductService.GetProducts();
+                var (products, metaData) = await _services.ProductService.GetProducts(productParameters);
+                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
                 return Ok(products);
             }
             catch

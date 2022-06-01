@@ -1,15 +1,11 @@
 ﻿using Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shared.RequestParameters;
 
 namespace Repository
 {
     public interface IProductVariantRepository
     {
-        Task<IEnumerable<ProductVariant>> GetVariants();
+        Task<PagedList<ProductVariant>> GetVariants(ProductVariantParameters productVariantParameters);
 
         Task<ProductVariant> GetVariantById(string productVariantID);
 

@@ -1,10 +1,11 @@
 ﻿using Entities.Models;
+using Shared.RequestParameters;
 
 namespace Repository
 {
     public interface IProductRepository
     {
-        Task<IEnumerable<Product>> GetProducts();
+        Task<PagedList<Product>> GetProducts(ProductParameters productParameters);
 
         Task<Product> GetProductById(string productId);
 

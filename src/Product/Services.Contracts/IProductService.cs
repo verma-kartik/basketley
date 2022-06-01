@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Shared.RequestParameters;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Services.Contracts
 {
     public interface IProductService
     {
-        public Task<IEnumerable<Product>> GetProducts();
+        public Task<(IEnumerable<Product>products, MetaData metaData)> GetProducts(ProductParameters productParameters);
 
         public Task<long> GetProductCount();
 

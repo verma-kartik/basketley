@@ -1,7 +1,9 @@
 ﻿using Entities.Models;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
+using Shared.RequestParameters;
 using System.Net;
+using System.Text.Json;
 
 namespace Presentation.Controllers
 {
@@ -18,11 +20,12 @@ namespace Presentation.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<ProductVariant>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<ProductVariant>>> GetVariants()
+        public async Task<ActionResult<IEnumerable<ProductVariant>>> GetVariants([FromQuery]ProductVariantParameters productVariantParameters)
         {
             try
             {
-                var variants = await _services.ProductVariantService.GetVariants();
+                var (variants, metaData) = await _services.ProductVariantService.GetVariants(productVariantParameters);
+                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
                 return Ok(variants);
             }
             catch

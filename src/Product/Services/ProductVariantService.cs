@@ -2,6 +2,7 @@
 using Entities.Models;
 using Repository;
 using Services.Contracts;
+using Shared.RequestParameters;
 
 namespace Services
 {
@@ -59,12 +60,12 @@ namespace Services
             }
         }
 
-        public async Task<IEnumerable<ProductVariant>> GetVariants()
+        public async Task<(IEnumerable<ProductVariant> variants, MetaData metaData)> GetVariants(ProductVariantParameters productVariantParameters)
         {
             try
             {
-                var variants = await _repositoryManager.ProductVariant.GetVariants();
-                return variants;
+                var variantsWithMetaData = await _repositoryManager.ProductVariant.GetVariants(productVariantParameters);
+                return (variants: variantsWithMetaData, metaData: variantsWithMetaData.MetaData );
             }
             catch (Exception ex)
             {

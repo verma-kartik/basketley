@@ -1,9 +1,5 @@
 ﻿using Entities.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shared.RequestParameters;
 
 namespace Services.Contracts
 {
@@ -15,6 +11,6 @@ namespace Services.Contracts
 
         public Task<ProductVariant> GetVariantById(string productVariantID);
 
-        public Task<IEnumerable<ProductVariant>> GetVariants();
+        public Task<(IEnumerable<ProductVariant> variants, MetaData metaData)> GetVariants(ProductVariantParameters productVariantParameters);
     }
 }
