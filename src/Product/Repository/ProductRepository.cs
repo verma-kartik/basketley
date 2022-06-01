@@ -66,7 +66,7 @@ namespace Repository
         public async Task<PagedList<Product>> GetProducts(ProductParameters productParameters)
         {
             var products = await _productContext.Products
-                .Find(p => true)
+                .Find(p => p.Price >= productParameters.MinPrice && p.Price <= productParameters.MaxPrice)
                 .SortBy(p => p.Name)
                 .ToListAsync();
 

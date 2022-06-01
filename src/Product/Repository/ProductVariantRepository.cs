@@ -41,7 +41,7 @@ namespace Repository
         public async Task<PagedList<ProductVariant>> GetVariants(ProductVariantParameters productVariantParameters)
         {
             var variants = await _variantContext.ProductVariants
-                .Find(p => true)
+                .Find(p => p.Price >= productVariantParameters.MinPrice && p.Price <= productVariantParameters.MaxPrice)
                 .ToListAsync();
 
             return PagedList<ProductVariant>.ToPagedList(variants, productVariantParameters.PageNumber, productVariantParameters.PageSize);
