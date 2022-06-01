@@ -12,6 +12,7 @@ LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nl
 builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureRepositryManager();
 builder.Services.ConfigureServiceManager();
+builder.Services.ConfigureVersioning();
 
 
 // Add services to the container.
@@ -19,14 +20,7 @@ builder.Services.ConfigureServiceManager();
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-    {
-        Title = "Product.API",
-        Version = "v1",
-    });
-});
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
@@ -34,8 +28,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Product.API v1"));
+    app.UseSwaggerUI();
 }
 
 app.UseAuthorization();

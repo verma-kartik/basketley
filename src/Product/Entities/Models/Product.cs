@@ -1,20 +1,15 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.IdGenerators;
+using System.Runtime.Serialization;
 
 namespace Entities.Models
 {
     [BsonIgnoreExtraElements]
     public class Product
     {
-        public Product()
-        {
-            WeightOfProduct = new Weight();
-            Image = new ProductImage();
-            ProductVariants = new List<ProductVariant> { new ProductVariant() };
-        }
-
-        [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
+        [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
         public string? Id { get; set; }
 
         [BsonElement("name")]
@@ -53,11 +48,13 @@ namespace Entities.Models
         public double Price { get; set; }
 
         [BsonElement("image")]
-        public ProductImage Image { get; set; }
+        public ProductImage? Image { get; set; }
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        public List<string>? ProductVariants { get; set; }
 
         [BsonIgnore]
-        [BsonElement("product-variant")]
-        public List<ProductVariant> ProductVariants { get; set; }
+        public List<ProductVariant>? ProductVariantList { get; set; }
 
     }
 }

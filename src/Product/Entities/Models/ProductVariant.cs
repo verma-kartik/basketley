@@ -3,32 +3,33 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Entities.Models
 {
+    [BsonIgnoreExtraElements]
     public class ProductVariant
     {
-        public ProductVariant() : this(string.Empty, string.Empty, 0, DateTime.Now, DateTime.Now, false) { }
-        public ProductVariant(string? id, string? title, double price, DateTime created, DateTime updated, bool isAvailable)
-        {
-            Id = id;
-            Title = title;
-            Price = price;
-            Created = created;
-            UpdatedAt = updated;
-            IsAvailable = isAvailable;
-        }
-
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public string? Id { get; set; }
 
-
+        [BsonElement("title")]
+        [BsonRequired]
         public string? Title { get; set; }
 
-
+        [BsonElement("price")]
+        [BsonRequired]
         public double Price { get; set; }
 
+        [BsonElement("created")]
         public DateTime Created { get; set; }
 
+        [BsonElement("updated_at")]
         public DateTime UpdatedAt { get; set; }
 
+        [BsonElement("is_available")]
         public bool IsAvailable { get; set; }
 
+        public static implicit operator ProductVariant(string id)
+        {
+            return new ProductVariant() { Id = id };
+        }
     }
 }

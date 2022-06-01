@@ -14,5 +14,9 @@ namespace Services.Contracts
         public Task<long> GetProductCount();
 
         public Task<Product> GetProductById(string productId);
+
+        public Task<bool> DeleteProduct(string productId);
+
+        public Task<Product> CreateProduct(Product product);
     }
 }

@@ -17,9 +17,11 @@ namespace Repository
             _productContext = productContext;
         }
 
-        public async Task CreateProduct(Product product)
+        public async Task<Product> CreateProduct(Product product)
         {
             await _productContext.Products.InsertOneAsync(product);
+
+            return product;
         }
 
         public async Task<bool> DeleteProduct(string productId)

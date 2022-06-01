@@ -60,5 +60,34 @@ namespace Services
             }
         }
 
+        public async Task<bool> DeleteProduct(string productId)
+        {
+            try
+            {
+                return await _repositoryManager.Product.DeleteProduct(productId);
+            }
+            catch (Exception ex)
+            {
+                _loggerManager.LogError($"Something went wrong in the {nameof(DeleteProduct)} " +
+                    $"service method {ex}. Product not found with ID {nameof(productId)}. Try again!");
+                throw;
+            }
+        }
+
+        public async Task<Product> CreateProduct(Product product)
+        {
+            try
+            {
+                var createdProduct = await _repositoryManager.Product.CreateProduct(product);
+                return createdProduct;
+            }
+            catch (Exception ex)
+            {
+                _loggerManager.LogError($"Something went wrong in the {nameof(CreateProduct)} " +
+                    $"service method {ex}. Cannot create product.");
+                throw;
+            }
+        }
+
     }
 }

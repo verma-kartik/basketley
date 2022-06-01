@@ -12,7 +12,7 @@ namespace Repository
 
         Task<IEnumerable<Product>> GetProductByCategory(string categoryName);
 
-        Task CreateProduct(Product product);
+        Task<Product> CreateProduct(Product product);
 
         Task<bool> UpdateProduct(Product product);
 

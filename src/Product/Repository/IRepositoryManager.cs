@@ -9,5 +9,6 @@ namespace Repository
     public interface IRepositoryManager
     {
         IProductRepository Product { get; }
+        IProductVariantRepository ProductVariant { get; }
     }
 }

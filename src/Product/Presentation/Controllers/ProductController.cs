@@ -55,6 +55,18 @@ namespace Presentation.Controllers
             try
             {
                 var productByID = await _services.ProductService.GetProductById(productId);
+                
+                if(productByID.ProductVariants.Count > 0)
+                {
+                    var tempList = new List<ProductVariant>();
+                    foreach(var variantId in productByID.ProductVariants)
+                    {
+                        var variant = await _services.ProductVariantService.GetVariantById(variantId);
+                        if(variant != null)
+                            tempList.Add(variant);
+                    }
+                    productByID.ProductVariantList = tempList;
+                }
                 return Ok(productByID);
             }
             catch
@@ -62,6 +74,50 @@ namespace Presentation.Controllers
                 return StatusCode(500, "Internal Server Error.");
             }
         }
+
+        [HttpPost]
+        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Product>> CreateProduct([FromBody] Product product)
+        {
+            //try
+            //{ 
+                var createdProduct = await _services.ProductService.CreateProduct(product);
+
+                if(createdProduct.ProductVariants.Count > 0)
+                {
+                    foreach (var variantID in createdProduct.ProductVariants)
+                    {
+                        if (await _services.ProductVariantService.GetVariantById(variantID) != null)
+                        {
+                             return StatusCode(500, "Internal Server Error.");
+                    }
+                        var variant = variantID;
+                        await _services.ProductVariantService.CreateVariant(variant);
+                    }
+                }
+                return Ok(createdProduct);
+            //}
+            //catch
+            //{
+            //    return StatusCode(500, "Internal Server Error.");
+            //}
+        }
+
+        [HttpDelete("{productId}", Name = "DeleteProduct")]
+        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<bool>> DeleteProductById(string productId)
+        {
+            try
+            {
+                bool isDeleted = await _services.ProductService.DeleteProduct(productId);
+               return Ok(isDeleted);
+            }
+            catch
+            {
+                return StatusCode(500, "Internal Server Error.");
+            }
+        }
+
 
     }
 }

@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using Entities.Models;
+using MongoDB.Driver;
 using Repository;
 
 namespace Product.API.ContextFactory
@@ -9,12 +10,10 @@ namespace Product.API.ContextFactory
         {
             var client = new MongoClient(configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
             var database = client.GetDatabase(configuration.GetValue<string>("DatabaseSettings:DatabaseName"));
-            Products = database.GetCollection<Entities.Models.Product>(configuration.GetValue<string>("DatabaseSettings:CollectionName"));
-
-            ContextSeed.SeedData(Products);
+            Products = database.GetCollection<Entities.Models.Product>(configuration.GetValue<string>("DatabaseSettings:CollectionName_1"));
+            //ContextSeed.SeedData(Products);
         }
 
         public IMongoCollection<Entities.Models.Product> Products { get; }
-       
     }
 }
