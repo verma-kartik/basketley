@@ -90,5 +90,19 @@ namespace Services
             }
         }
 
+        public async Task<bool> UpdateProduct(Product product)
+        {
+            try
+            {
+                return await _repositoryManager.Product.UpdateProduct(product);
+            }
+            catch (Exception ex)
+            {
+                _loggerManager.LogError($"Something went wrong in the {nameof(CreateProduct)} " +
+                    $"service method {ex}. Cannot update product.");
+                throw;
+            }
+        }
+
     }
 }

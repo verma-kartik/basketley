@@ -20,7 +20,7 @@ namespace Presentation.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Product>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<Product>>> GetProducts([FromQuery] ProductParameters productParameters)
+        public async Task<ActionResult> GetProducts([FromQuery] ProductParameters productParameters)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace Presentation.Controllers
         [Route("count")]
         [HttpGet]
         [ProducesResponseType(typeof(long), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<long>> GetCount()
+        public async Task<ActionResult> GetCount()
         {
             try
             {
@@ -53,13 +53,14 @@ namespace Presentation.Controllers
         [HttpGet("{productId}", Name = "GetProduct")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Product>> GetProductById(string productId)
+        public async Task<ActionResult> GetProductById(string productId)
         {
             try
             {
-                var productByID = await _services.ProductService.GetProductById(productId);
-                
-                if(productByID.ProductVariants.Count > 0)
+                Product? productByID = await _services.ProductService.GetProductById(productId);
+
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                if (productByID.ProductVariants.Count > 0)
                 {
                     var tempList = new List<ProductVariant>();
                     foreach(var variantId in productByID.ProductVariants)
@@ -70,6 +71,7 @@ namespace Presentation.Controllers
                     }
                     productByID.ProductVariantList = tempList;
                 }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 return Ok(productByID);
             }
             catch
@@ -80,13 +82,14 @@ namespace Presentation.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Product>> CreateProduct([FromBody] Product product)
+        public async Task<ActionResult> CreateProduct([FromBody] Product product)
         {
-            //try
-            //{ 
+            try
+            {
                 var createdProduct = await _services.ProductService.CreateProduct(product);
 
-                if(createdProduct.ProductVariants.Count > 0)
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                if (createdProduct.ProductVariants.Count > 0)
                 {
                     foreach (var variantID in createdProduct.ProductVariants)
                     {
@@ -98,22 +101,38 @@ namespace Presentation.Controllers
                         await _services.ProductVariantService.CreateVariant(variant);
                     }
                 }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 return Ok(createdProduct);
-            //}
-            //catch
-            //{
-            //    return StatusCode(500, "Internal Server Error.");
-            //}
+            }
+            catch
+            {
+                return StatusCode(500, "Internal Server Error.");
+            }
         }
 
         [HttpDelete("{productId}", Name = "DeleteProduct")]
         [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<bool>> DeleteProductById(string productId)
+        public async Task<ActionResult> DeleteProductById(string productId)
         {
             try
             {
                 bool isDeleted = await _services.ProductService.DeleteProduct(productId);
                return Ok(isDeleted);
+            }
+            catch
+            {
+                return StatusCode(500, "Internal Server Error.");
+            }
+        }
+
+        [HttpPut]
+        [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> UpdateProduct([FromBody] Product product)
+        {
+            try
+            {
+                bool isUpdated = await _services.ProductService.UpdateProduct(product);
+                return Ok(isUpdated);
             }
             catch
             {

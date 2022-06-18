@@ -19,5 +19,7 @@ namespace Services.Contracts
         public Task<bool> DeleteProduct(string productId);
 
         public Task<Product> CreateProduct(Product product);
+
+        public Task<bool> UpdateProduct(Product product);
     }
 }
