@@ -7,7 +7,7 @@ namespace Entities
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public string? CustomerID { get; set; }
+        public int? CustomerID { get; set; }
 
         public string? FirstName { get; set; }
 

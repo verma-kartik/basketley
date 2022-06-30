@@ -10,13 +10,13 @@ namespace Repository
         {
         }
 
-        public void CreateAddressForcustomer(string customerId, Address address)
+        public void CreateAddressForcustomer(int customerId, Address address)
         {
             address.CustomerId = customerId;
             Create(address);
         }
 
-        public void DeleteAddress(string customerId, Address address)
+        public void DeleteAddress(int customerId, Address address)
         {
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
             var toBeDeleted = FindByCondition(a => a.CustomerId.Equals(customerId)
@@ -26,7 +26,7 @@ namespace Repository
             Delete((Address)toBeDeleted);
         }
 
-        public async Task<Address> GetAddress(string customerId, string addressId, bool trackChanges)
+        public async Task<Address> GetAddress(int customerId, string addressId, bool trackChanges)
         {
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
             Address? address =  await FindByCondition(a => a.CustomerId.Equals(customerId) && a.Id.Equals(addressId), trackChanges)
@@ -37,7 +37,7 @@ namespace Repository
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
         }
 
-        public async Task<IEnumerable<Address>> GetAddresses(string customerId, bool trackChanges)
+        public async Task<IEnumerable<Address>> GetAddresses(int customerId, bool trackChanges)
         {
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
             return await FindByCondition(a => a.CustomerId.Equals(customerId), trackChanges)

@@ -1,10 +1,5 @@
 ﻿using Contracts;
 using Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -16,10 +11,24 @@ namespace Repository
 
         public void CreateCustomer(Customer customer)
         {
-            Create(customer);
+            var entity = new Customer()
+            {
+                CustomerID = customer.CustomerID,
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                Company = customer.Company,
+                CountryCode = customer.CountryCode,
+                CountryName = customer.CountryName,
+                Phone = customer.Phone,
+                Email = customer.Email,
+                EmailMarketingConsent = customer.EmailMarketingConsent,
+                VerfiedEmail = customer.VerfiedEmail,
+                Addresses = customer.Addresses
+            };
+            Create(entity);
         }
 
-        public Customer GetCustomerById(string? customerId, bool trackChanges)
+        public Customer GetCustomerById(int? customerId, bool trackChanges)
         {
             Customer? customer = FindByCondition(c => c.CustomerID.Equals(customerId), trackChanges).SingleOrDefault();
 #pragma warning disable CS8603 // Possible null reference return.
@@ -39,6 +48,17 @@ namespace Repository
         public IEnumerable<Customer> GetCustomers(bool trackChanges)
         {
             return FindAll(trackChanges).OrderBy(c => c.FirstName).ToList();
+        }
+
+        public bool DeleteCustomer(int customerId, bool trackChanges)
+        {
+            Customer? customer = FindByCondition(c => c.CustomerID.Equals(customerId), trackChanges).SingleOrDefault();
+            if (customer == null)
+                return false;
+
+            Delete(customer);
+            return true; 
+
         }
     }
 }

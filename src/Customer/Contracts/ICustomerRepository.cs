@@ -4,12 +4,14 @@ namespace Contracts
 {
     public interface ICustomerRepository
     {
-        Customer GetCustomerById(string customerId, bool trackChanges);
+        Customer GetCustomerById(int? customerId, bool trackChanges);
 
         IEnumerable<Customer> GetCustomers(bool trackChanges);
 
         void CreateCustomer(Customer customer);
 
         long GetCustomerCount();
+
+        bool DeleteCustomer(int customerId, bool trackChanges);
     }
 }

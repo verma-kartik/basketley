@@ -2,6 +2,8 @@
 using LoggerService;
 using Microsoft.EntityFrameworkCore;
 using Repository;
+using Services;
+using Services.Contracts;
 
 namespace Customer.API.Extensions;
 
@@ -22,12 +24,15 @@ public static class ServiceExtension
 		});
 
 	public static void ConfigureLoggerService(this IServiceCollection services) =>
-        services.AddSingleton<ILoggerManager, LoggerManager>();
+        services.AddScoped<ILoggerManager, LoggerManager>();
 
-    public static void ConfigureRepositryManager(this IServiceCollection services) =>
+    public static void ConfigureRepositoryManager(this IServiceCollection services) =>
         services.AddScoped<IRepositoryManager, RepositoryManager>();
 
-    public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
+	public static void ConfigureServiceManager(this IServiceCollection services) =>
+	   services.AddScoped<IServiceManager, ServiceManager>();
+
+	public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
         services.AddDbContext<RepositoryContext>(opts =>
             opts.UseMySql(configuration.GetConnectionString("sqlConnection"),
                 ServerVersion.AutoDetect(configuration.GetConnectionString("sqlConnection"))));

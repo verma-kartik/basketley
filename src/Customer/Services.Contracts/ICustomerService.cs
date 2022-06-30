@@ -1,24 +1,19 @@
 ﻿using Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services.Contracts
 {
     public interface ICustomerService
     {
-        public Task<IEnumerable<Customer>> GetCustomerss();
+        public IEnumerable<Customer> GetCustomers(bool trackChanges);
 
-        public Task<long> GetCustomerCount();
+        public long GetCustomerCount();
 
-        public Task<Customer> GetCustomerById(string customerId);
+        public Customer GetCustomerById(int customerId, bool trackChanges);
 
-        public Task<bool> DeleteCustomer(string customerId);
+        public bool DeleteCustomer(int customerId, bool trackChanges);
 
-        public Task<Customer> CreateCustomer(Customer customer);
+        public Customer CreateCustomer(Customer customer);
 
-        public Task<bool> UpdateCustomer(Customer customer);
+        public bool UpdateCustomer(Customer customer);
     }
 }

@@ -3,7 +3,7 @@ using Services.Contracts;
 
 namespace Services
 {
-    internal sealed class AddressService : IAddressService
+    public sealed class AddressService : IAddressService
     {
         private readonly IRepositoryManager _repository;
         private readonly ILoggerManager _logger;
