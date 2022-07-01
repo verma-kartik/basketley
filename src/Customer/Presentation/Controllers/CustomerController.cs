@@ -18,12 +18,22 @@ namespace Presentation.Controllers
 
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<Customer>), (int)HttpStatusCode.OK)]
-        public ActionResult GetCustomers()
+        public async Task<ActionResult> GetCustomers()
         {
             try
             {
-                var products =  _services.CustomerService.GetCustomers(trackChanges: false);
-                return Ok(products);
+                var customers =  _services.CustomerService.GetCustomers(trackChanges: false);
+                foreach(var customer in customers)
+                {
+#pragma warning disable CS8629 // Nullable value type may be null.
+                    var addresses = await _services.AddressService.GetAddresses((int)customer.CustomerID, trackChanges: false);
+#pragma warning restore CS8629 // Nullable value type may be null.
+                    if (addresses.Any())
+                    {
+                        customer.Addresses = (List<Address>?)addresses;
+                    }          
+                }
+                return Ok(customers);
             }
             catch
             {
@@ -50,23 +60,17 @@ namespace Presentation.Controllers
         [HttpGet("{customerId}", Name = "GetCustomer")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public ActionResult GetCustomerById(int customerId)
+        public async Task<ActionResult> GetCustomerById(int customerId)
         {
             try
             {
-                Customer? customerByID =  _services.CustomerService.GetCustomerById(customerId, trackChanges: false);   
+                Customer? customerByID =  _services.CustomerService.GetCustomerById(customerId, trackChanges: false);
 
-                //if(customerByID.Addresses.Count > 0)
-                //{
-                //    var tempList = new List<Address>();
-                //    foreach(var addressId in customerByID.Addresses)
-                //    {
-                //        var address = await _services.AddressService.GetAddressById(customerByID, addressId);
-                //        if (address != null)
-                //            tempList.Add(address);
-                //    }
-                //    customerByID.Addresses = tempList;  
-                //}
+                var addresses = await _services.AddressService.GetAddresses(customerId, trackChanges: false);
+                if(addresses.Any())
+                {
+                    customerByID.Addresses = (List<Address>?)addresses;
+                }
                 return Ok(customerByID);
             }
             catch
@@ -75,43 +79,29 @@ namespace Presentation.Controllers
             }
         }
 
-        [HttpDelete("{customerId}", Name = "DeleteCustomer")]
-        [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-        public ActionResult DeleteCustomerById(int customerId)
-        {
-            try
-            {
-                bool isDeleted =  _services.CustomerService.DeleteCustomer(customerId, trackChanges: false);
-                return Ok(isDeleted);
-            }
-            catch
-            {
-                return StatusCode(500, "Internal Server Error.");
-            }
-        }
-
         [HttpPost]
         [ProducesResponseType(typeof(Customer), (int)HttpStatusCode.OK)]
-        public ActionResult CreateCustomer([FromBody] Customer customer)
+        public async Task<ActionResult> CreateCustomer([FromBody] Customer customer)
         {
             try
             {
                 var createdCustomer =  _services.CustomerService.CreateCustomer(customer);
 
-//#pragma warning disable CS8602 // Dereference of a possibly null reference.
-//                if (createdCustomer.Addresses.Count > 0)
-//                {
-//                    foreach (var variantID in createdProduct.ProductVariants)
-//                    {
-//                        if (await _services.ProductVariantService.GetVariantById(variantID) != null)
-//                        {
-//                            return StatusCode(500, "Internal Server Error.");
-//                        }
-//                        var variant = variantID;
-//                        await _services.ProductVariantService.CreateVariant(variant);
-//                    }
-//                }
-//#pragma warning restore CS8602 // Dereference of a possibly null reference.
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
+                if (createdCustomer.Addresses.Count > 0)
+                {
+                    foreach (var address in createdCustomer.Addresses)
+                    {
+#pragma warning disable CS8629 // Nullable value type may be null.
+                        if (await _services.AddressService.GetAddress((int)createdCustomer.CustomerID, int.Parse(address.Id), trackChanges: false) != null)
+                        {
+                            return StatusCode(500, "Internal Server Error.");
+                        }
+#pragma warning restore CS8629 // Nullable value type may be null.
+                        await _services.AddressService.CreateAddressForCustomer((int)createdCustomer.CustomerID, address);
+                    }
+                }
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
                 return Ok(createdCustomer);
             }
             catch

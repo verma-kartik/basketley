@@ -50,15 +50,5 @@ namespace Repository
             return FindAll(trackChanges).OrderBy(c => c.FirstName).ToList();
         }
 
-        public bool DeleteCustomer(int customerId, bool trackChanges)
-        {
-            Customer? customer = FindByCondition(c => c.CustomerID.Equals(customerId), trackChanges).SingleOrDefault();
-            if (customer == null)
-                return false;
-
-            Delete(customer);
-            return true; 
-
-        }
     }
 }

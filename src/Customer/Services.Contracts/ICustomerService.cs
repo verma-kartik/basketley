@@ -10,8 +10,6 @@ namespace Services.Contracts
 
         public Customer GetCustomerById(int customerId, bool trackChanges);
 
-        public bool DeleteCustomer(int customerId, bool trackChanges);
-
         public Customer CreateCustomer(Customer customer);
 
         public bool UpdateCustomer(Customer customer);

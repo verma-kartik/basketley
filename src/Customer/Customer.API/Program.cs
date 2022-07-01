@@ -16,8 +16,6 @@ builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
 
-builder.Services.AddControllers();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

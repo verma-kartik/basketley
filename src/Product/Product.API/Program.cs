@@ -1,9 +1,5 @@
 using Product.API.Extensions;
 using NLog;
-using Repository;
-using Services.Contracts;
-using Services;
-using Product.API.ContextFactory;
 
 var builder = WebApplication.CreateBuilder(args);
 

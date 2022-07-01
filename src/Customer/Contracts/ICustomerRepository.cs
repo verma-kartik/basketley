@@ -11,7 +11,5 @@ namespace Contracts
         void CreateCustomer(Customer customer);
 
         long GetCustomerCount();
-
-        bool DeleteCustomer(int customerId, bool trackChanges);
     }
 }

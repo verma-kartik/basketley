@@ -19,7 +19,7 @@ namespace Services
         {
             try
             {
-                 _repository.Customer.CreateCustomer(customer);
+                _repository.Customer.CreateCustomer(customer);
                 _repository.SaveAsync();
     
                 return customer;
@@ -28,20 +28,6 @@ namespace Services
             {
                 _logger.LogError($"Something went wrong in the {nameof(CreateCustomer)} " +
                     $"service method {ex}. Cannot create customer.");
-                throw;
-            }
-        }
-
-        public bool DeleteCustomer(int customerId, bool trackChanges)
-        {
-            try
-            {
-                return _repository.Customer.DeleteCustomer(customerId, trackChanges);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"Something went wrong in the {nameof(DeleteCustomer)} " +
-                    $"service method {ex}. Product not found with ID {nameof(customerId)}. Try again!");
                 throw;
             }
         }
