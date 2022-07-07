@@ -7,11 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NLog.Extensions.Logging" Version="5.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Contracts\Contracts.csproj" />
+    <Folder Include="ErrorModels\" />
   </ItemGroup>
 
 </Project>
