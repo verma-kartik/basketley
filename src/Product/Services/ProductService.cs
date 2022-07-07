@@ -20,88 +20,34 @@ namespace Services
         
         public async Task<(IEnumerable<Product> products, MetaData metaData)> GetProducts(ProductParameters productParameters)
         {
-            try
-            {
-                var productsWithMetaData = await _repositoryManager.Product.GetProducts(productParameters);
-                return (products: productsWithMetaData, metaData: productsWithMetaData.MetaData);
-            }
-            catch(Exception ex)
-            {
-                _loggerManager.LogError($"Something went wrong in the {nameof(GetProducts)} " +
-                    $"service method {ex}");
-                throw;
-            }
+            var productsWithMetaData = await _repositoryManager.Product.GetProducts(productParameters);
+            return (products: productsWithMetaData, metaData: productsWithMetaData.MetaData);
         }
 
         public async Task<long> GetProductCount()
         {
-            try
-            {
-                return await _repositoryManager.Product.GetProductCount();
-            }
-            catch (Exception ex)
-            {
-                _loggerManager.LogError($"Something went wrong in the {nameof(GetProductCount)} " +
-                    $"service method {ex}");
-                throw;
-            }
+            return await _repositoryManager.Product.GetProductCount();
         }
 
         public async Task<Product> GetProductById(string productId)
         {
-            try
-            {
-                return await _repositoryManager.Product.GetProductById(productId);
-            }
-            catch (Exception ex)
-            {
-                _loggerManager.LogError($"Something went wrong in the {nameof(GetProductById)} " +
-                    $"service method {ex}. Product not found with ID {nameof(productId)}. Try again!");
-                throw;
-            }
+            return await _repositoryManager.Product.GetProductById(productId);
         }
 
         public async Task<bool> DeleteProduct(string productId)
         {
-            try
-            {
-                return await _repositoryManager.Product.DeleteProduct(productId);
-            }
-            catch (Exception ex)
-            {
-                _loggerManager.LogError($"Something went wrong in the {nameof(DeleteProduct)} " +
-                    $"service method {ex}. Product not found with ID {nameof(productId)}. Try again!");
-                throw;
-            }
+            return await _repositoryManager.Product.DeleteProduct(productId);
         }
 
         public async Task<Product> CreateProduct(Product product)
         {
-            try
-            {
-                var createdProduct = await _repositoryManager.Product.CreateProduct(product);
-                return createdProduct;
-            }
-            catch (Exception ex)
-            {
-                _loggerManager.LogError($"Something went wrong in the {nameof(CreateProduct)} " +
-                    $"service method {ex}. Cannot create product.");
-                throw;
-            }
+            var createdProduct = await _repositoryManager.Product.CreateProduct(product);
+            return createdProduct;
         }
 
         public async Task<bool> UpdateProduct(Product product)
         {
-            try
-            {
-                return await _repositoryManager.Product.UpdateProduct(product);
-            }
-            catch (Exception ex)
-            {
-                _loggerManager.LogError($"Something went wrong in the {nameof(CreateProduct)} " +
-                    $"service method {ex}. Cannot update product.");
-                throw;
-            }
+            return await _repositoryManager.Product.UpdateProduct(product);
         }
 
     }

@@ -22,16 +22,9 @@ namespace Presentation.Controllers
         [ProducesResponseType(typeof(IEnumerable<ProductVariant>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<IEnumerable<ProductVariant>>> GetVariants([FromQuery]ProductVariantParameters productVariantParameters)
         {
-            try
-            {
-                var (variants, metaData) = await _services.ProductVariantService.GetVariants(productVariantParameters);
-                Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
-                return Ok(variants);
-            }
-            catch
-            {
-                return StatusCode(500, "Internal Server Error.");
-            }
+            var (variants, metaData) = await _services.ProductVariantService.GetVariants(productVariantParameters);
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(metaData));
+            return Ok(variants);
         }
 
         [HttpGet("{variantId}", Name = "GetVariant")]
@@ -39,48 +32,27 @@ namespace Presentation.Controllers
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<ProductVariant>> GetvariantById(string variantId)
         {
-            try
-            {
-                var variantByID = await _services.ProductVariantService.GetVariantById(variantId);
-                return Ok(variantByID);
-            }
-            catch
-            {
-                return StatusCode(500, "Internal Server Error.");
-            }
+            var variantByID = await _services.ProductVariantService.GetVariantById(variantId);
+            return Ok(variantByID);
         }
 
         [HttpPost]
         [ProducesResponseType(typeof(ProductVariant), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<ProductVariant>> CreateVariant([FromBody] ProductVariant variant)
         {
-            try
-            {
-                if (!ModelState.IsValid)
-                    return BadRequest();
+            if (!ModelState.IsValid)
+                return BadRequest();
 
-                var createdVariant = await _services.ProductVariantService.CreateVariant(variant);
-                return createdVariant;
-            }
-            catch
-            {
-                return StatusCode(500, "Internal Server Error.");
-            }
+            var createdVariant = await _services.ProductVariantService.CreateVariant(variant);
+            return createdVariant;
         }
 
         [HttpDelete("{variantId}", Name = "DeleteVariant")]
         [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<bool>> DeleteVariant(string variantId)
         {
-            try
-            {
-                bool isDeleted = await _services.ProductVariantService.DeleteVariant(variantId);
-                return Ok(isDeleted);
-            }
-            catch
-            {
-                return StatusCode(500, "Internal Server Error.");
-            }
+            bool isDeleted = await _services.ProductVariantService.DeleteVariant(variantId);
+            return Ok(isDeleted);
         }
     }
 }

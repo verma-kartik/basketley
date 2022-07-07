@@ -19,60 +19,24 @@ namespace Services
 
         public async Task<ProductVariant> CreateVariant(ProductVariant variant)
         {
-            try
-            {
-                var createdVariant = await _repositoryManager.ProductVariant.CreateVariant(variant);
-                return createdVariant;
-            }
-            catch (Exception ex)
-            {
-                _loggerManager.LogError($"Something went wrong in the {nameof(CreateVariant)} " +
-                    $"service method {ex}. Cannot create variant.");
-                throw;
-            }
+            var createdVariant = await _repositoryManager.ProductVariant.CreateVariant(variant);
+            return createdVariant;
         }
 
         public async Task<bool> DeleteVariant(string productVariantId)
         {
-            try
-            {
-                return await _repositoryManager.ProductVariant.DeleteVariant(productVariantId);
-            }
-            catch (Exception ex)
-            {
-                _loggerManager.LogError($"Something went wrong in the {nameof(DeleteVariant)} " +
-                    $"service method {ex}. Product Variant not found with ID {nameof(productVariantId)}. Try again!");
-                throw;
-            }
+            return await _repositoryManager.ProductVariant.DeleteVariant(productVariantId);
         }
 
         public async Task<ProductVariant> GetVariantById(string productVariantID)
         {
-            try
-            {
-                return await _repositoryManager.ProductVariant.GetVariantById(productVariantID);
-            }
-            catch (Exception ex)
-            {
-                _loggerManager.LogError($"Something went wrong in the {nameof(GetVariantById)} " +
-                    $"service method {ex}. Product Variant not found with ID {nameof(productVariantID)}. Try again!");
-                throw;
-            }
+            return await _repositoryManager.ProductVariant.GetVariantById(productVariantID);
         }
 
         public async Task<(IEnumerable<ProductVariant> variants, MetaData metaData)> GetVariants(ProductVariantParameters productVariantParameters)
         {
-            try
-            {
-                var variantsWithMetaData = await _repositoryManager.ProductVariant.GetVariants(productVariantParameters);
-                return (variants: variantsWithMetaData, metaData: variantsWithMetaData.MetaData );
-            }
-            catch (Exception ex)
-            {
-                _loggerManager.LogError($"Something went wrong in the {nameof(GetVariants)} " +
-                    $"service method {ex}");
-                throw;
-            }
+            var variantsWithMetaData = await _repositoryManager.ProductVariant.GetVariants(productVariantParameters);
+            return (variants: variantsWithMetaData, metaData: variantsWithMetaData.MetaData);
         }
     }
 }
