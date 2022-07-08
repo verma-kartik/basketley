@@ -1,4 +1,4 @@
-# E-Commerce API (Microservice Backend)
+# 🛍️ E-Commerce API (Microservice Backend)
 
 > `E-Commerce API` is a fictional ecommerce sample, built with .Net 6 and different software architecture and technologies like **Microservices Architecture**, **Onion Architecture**, **Domain Driven Design (DDD)**, **Event Driven Architecture**. For communication between independent services, we use asynchronous messaging with using Rabbitmq and gateway service using OcelotAPI Gateway.
 
@@ -29,4 +29,4 @@ High-level plan is represented in the table
 | Payment Service | Not Started 🚩 |
 
 ## License
-The project is under [Apache License 2.0](LICENSE).
+The project is under [Apache License 2.0](https://github.com/verma-kartik/ecommerce-api/blob/main/LICENSE).
