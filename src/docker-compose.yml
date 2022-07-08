@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  customer-db:
+    image: mysql:latest
+
+  product-db:
+    image: mongo:latest
+
+  customer.api:
+    image: ${DOCKER_REGISTRY-}customerapi
+    build:
+      context: .
+      dockerfile: Customer/Customer.API/Dockerfile
+
+  product.api:
+    image: ${DOCKER_REGISTRY-}productapi
+    build:
+      context: .
+      dockerfile: Product/Product.API/Dockerfile
+
+volumes:
+  customer-data:
+  product-data:

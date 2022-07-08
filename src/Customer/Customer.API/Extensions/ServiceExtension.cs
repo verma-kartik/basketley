@@ -32,8 +32,12 @@ public static class ServiceExtension
 	public static void ConfigureServiceManager(this IServiceCollection services) =>
 	   services.AddScoped<IServiceManager, ServiceManager>();
 
-	public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
-        services.AddDbContext<RepositoryContext>(opts =>
-            opts.UseMySql(configuration.GetConnectionString("sqlConnection"),
-                ServerVersion.AutoDetect(configuration.GetConnectionString("sqlConnection"))));
+	//public static void ConfigureSqlContext(this IServiceCollection services)
+	//{
+	//	string? connectionString = "server=db;port=28002;database=CustomerDb;userid=root;password=gossipgirl";
+
+	//	services.AddDbContext<RepositoryContext>(opts =>
+	//		opts.UseMySql(connectionString,
+	//			ServerVersion.AutoDetect(connectionString)));
+	//}
 }

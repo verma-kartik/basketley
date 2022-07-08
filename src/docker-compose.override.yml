@@ -1,0 +1,41 @@
+version: '3.4'
+
+services:
+  customer-db:
+    container_name: customer_mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=gossipgirl
+    restart: always
+    ports:
+      - "29002:3306"
+    volumes:
+      - customer-data:/var/lib/mysql
+      - "~/sql-scripts/setup.sql:/docker-entrypoint-initdb.d/1.sql"
+
+  product-db:
+    container_name: product_mongo
+    restart: always
+    ports:
+      - "29001:27017"
+    volumes:
+      - product-data:/data/db
+
+  customer.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:sqlConnection=host=host.docker.internals;port=29002;database=CustomerDb;userid=root;password=gossipgirl"
+    depends_on:
+      - customer-db
+    ports:
+      - "5006:80"
+
+  product.api:
+    container_name: Product.API
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings:ConnectionString:mongodb://product-db:29001"
+    depends_on:
+      - product-db
+    ports:
+      - "5011:80"
+
