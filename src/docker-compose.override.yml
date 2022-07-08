@@ -27,15 +27,15 @@ services:
     depends_on:
       - customer-db
     ports:
-      - "5006:80"
+      - "8006:80"
 
   product.api:
     container_name: Product.API
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "DatabaseSettings:ConnectionString:mongodb://product-db:29001"
+      - "DatabaseSettings:ConnectionString=mongodb://localhost:29001"
     depends_on:
       - product-db
     ports:
-      - "5011:80"
+      - "8007:80"
 
