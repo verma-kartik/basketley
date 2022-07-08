@@ -29,4 +29,4 @@ High-level plan is represented in the table
 | Payment Service | Not Started 🚩 |
 
 ## License
-The project is under [MIT license](https://github.com/mehdihadeli/ecommerce-microservices-sample/blob/main/LICENSE).
+The project is under [Apache License 2.0](LICENSE).
