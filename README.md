@@ -20,7 +20,7 @@ High-level plan is represented in the table
 | Feature | Status |
 | ------- | ------ |
 | Building Blocks | Not Started 🚩 |
-| API Gateway | Not Started 🚩 |
+| API Gateway | In Progress 👷‍ |
 | Identity Service | In Progress 👷‍ |
 | Customer Service | Completed ✔️ |
 | Product Service | Completed ✔️ |
