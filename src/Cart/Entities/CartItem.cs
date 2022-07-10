@@ -1,7 +1,7 @@
 ﻿namespace Entities
 {
     public class CartItem
-    {
+    {  
         public DateTimeOffset CreatedOn { get; set; }
 
         public int ProductId { get; set; }

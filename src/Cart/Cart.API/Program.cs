@@ -1,5 +1,6 @@
 using Cart.API.Extensions;
 using Contracts;
+using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
