@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson.Serialization.IdGenerators;
+using System.ComponentModel.DataAnnotations;
 
 namespace Entities
 {
@@ -10,6 +13,10 @@ namespace Entities
             LatestUpdatedOn = DateTimeOffset.Now;
             IsActive = true;
         }
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        [BsonId(IdGenerator = typeof(StringObjectIdGenerator))]
+        public string? CartId { get; set; }
 
         public int CustomerId { get; set; }
 
