@@ -4,6 +4,10 @@ using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.ConfigureLoggerService();
+builder.Services.ConfigureRepositryManager();
+builder.Services.ConfigureServiceManager();
+builder.Services.ConfigureVersioning();
 
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);
@@ -24,8 +28,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthorization();
 

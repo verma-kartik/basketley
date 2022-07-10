@@ -10,6 +10,6 @@
 
         public long CartId { get; set; }
 
-        public Cart? Cart { get; set; }
+        
     }
 }
