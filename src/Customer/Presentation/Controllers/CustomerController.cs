@@ -64,7 +64,7 @@ namespace Presentation.Controllers
         {
             try
             {
-                Customer? customerByID =  _services.CustomerService.GetCustomerById(customerId, trackChanges: false);
+                Customer customerByID =  _services.CustomerService.GetCustomerById(customerId, trackChanges: false);
 
                 var addresses = await _services.AddressService.GetAddresses(customerId, trackChanges: false);
                 if(addresses.Any())
