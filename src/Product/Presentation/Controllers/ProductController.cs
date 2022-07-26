@@ -32,7 +32,7 @@ namespace Presentation.Controllers
         [ProducesResponseType(typeof(long), (int)HttpStatusCode.OK)]
         public async Task<ActionResult> GetCount()
         {
-            long count = await _services.ProductService.GetProductCount();
+            var count = await _services.ProductService.GetProductCount();
             return Ok(count);
            
         }
@@ -95,7 +95,7 @@ namespace Presentation.Controllers
         [ProducesResponseType(typeof(Product), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> UpdateProduct([FromBody] Product product)
         {
-            bool isUpdated = await _services.ProductService.UpdateProduct(product);
+            bool isUpdated = await _services.ProductService.UpdateProduct((product));
             return Ok(isUpdated);
         }
     }

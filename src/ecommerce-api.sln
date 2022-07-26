@@ -81,6 +81,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus.Messages", "Commun
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggerService", "Discount\LoggerService\LoggerService.csproj", "{33D4FA38-9159-4536-B11F-766682D45E70}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Discount.API", "Discount\Discount.API\Discount.API.csproj", "{3563C91B-5028-4775-9272-453B46ABD8F7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -215,6 +217,10 @@ Global
 		{33D4FA38-9159-4536-B11F-766682D45E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33D4FA38-9159-4536-B11F-766682D45E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33D4FA38-9159-4536-B11F-766682D45E70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3563C91B-5028-4775-9272-453B46ABD8F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3563C91B-5028-4775-9272-453B46ABD8F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3563C91B-5028-4775-9272-453B46ABD8F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3563C91B-5028-4775-9272-453B46ABD8F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -256,6 +262,7 @@ Global
 		{2EAB7926-FC2F-4E3B-8746-43F9E7C12E0D} = {4324E592-5DCB-4BB6-A249-888D6EBD2C73}
 		{7DBA617F-D244-4714-937E-4C0E849A4837} = {00B58208-26A8-4DEA-8015-C69F479EAD48}
 		{33D4FA38-9159-4536-B11F-766682D45E70} = {FA54BDB8-B961-48EB-8CBB-B58422578AB6}
+		{3563C91B-5028-4775-9272-453B46ABD8F7} = {FA54BDB8-B961-48EB-8CBB-B58422578AB6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C1AE7779-00ED-470B-86BC-6DC477F883C8}
