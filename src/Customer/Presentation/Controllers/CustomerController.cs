@@ -93,7 +93,7 @@ namespace Presentation.Controllers
                     foreach (var address in createdCustomer.Addresses)
                     {
 #pragma warning disable CS8629 // Nullable value type may be null.
-                        if (await _services.AddressService.GetAddress((int)createdCustomer.CustomerID, int.Parse(address.Id), trackChanges: false) != null)
+                        if (await _services.AddressService.GetAddress((int)createdCustomer.CustomerID, address.Id, trackChanges: false) != null)
                         {
                             return StatusCode(500, "Internal Server Error.");
                         }

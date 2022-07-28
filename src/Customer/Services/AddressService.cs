@@ -32,7 +32,7 @@ namespace Services
             }
         }
 
-        public async Task<bool> DeleteAddress(int customerId, int addressId)
+        public async Task<bool> DeleteAddress(int customerId, string addressId)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace Services
             }
         }
 
-        public async Task<Address> GetAddress(int customerId, int addressId, bool trackChanges)
+        public async Task<Address> GetAddress(int customerId, string addressId, bool trackChanges)
         {
             try
             {

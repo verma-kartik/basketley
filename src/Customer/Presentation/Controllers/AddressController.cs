@@ -34,7 +34,7 @@ namespace Presentation.Controllers
         [HttpGet("{addressId}", Name = "GetAddress")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType((int)HttpStatusCode.OK)]
-        public async Task<ActionResult> GetAddress(int customerId, int addressId)
+        public async Task<ActionResult> GetAddress(int customerId, string addressId)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace Presentation.Controllers
 
         [HttpDelete("{addressId}", Name = "DeleteAddress")]
         [ProducesResponseType(typeof(bool), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult> DeleteAddress(int customerId, int addressId)
+        public async Task<ActionResult> DeleteAddress(int customerId, string addressId)
         {
             try
             {
