@@ -1,4 +1,4 @@
-# 🛍️ E-Commerce API (Microservice Backend)
+# 🛍️ Basketley - E-Commerce API (Microservice Backend)
 
 > `E-Commerce API` is a fictional ecommerce sample, built with .Net 6 and different software architecture and technologies like **Microservices Architecture**, **Onion Architecture**, **Domain Driven Design (DDD)**, **Event Driven Architecture**. For communication between independent services, we use asynchronous messaging with using Rabbitmq and gateway service using OcelotAPI Gateway.
 
